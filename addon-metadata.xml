@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+    <meta>
+        <file-type type="string">FlightGear add-on metadata</file-type>
+        <format-version type="int">1</format-version>
+    </meta>
+
+    <addon>
+        <identifier type="string">org.hallinger.flightgear.SinkrateVisualizer</identifier>
+        <name type="string">SinkrateVisualizer</name>
+        <version type="string">0.0.1</version>
+
+        <authors>
+            <author>
+                <name type="string">Benedikt Hallinger</name>
+                <email type="string">beni@hallinger.org</email>
+                <url type="string">https://wiki.flightgear.org/SinkrateVisualizer</url>
+            </author>
+        </authors>
+
+        <maintainers>
+            <maintainer>
+                <name type="string">Benedikt Hallinger</name>
+                <email type="string">beni@hallinger.org</email>
+                <url type="string"></url>
+            </maintainer>
+        </maintainers>
+
+        <short-description type="string">Visualize sinkrate in a moving map</short-description>
+        <long-description type="string">SinkrateVisualizer helps glider pilots to learn centering the thermals by visualizing the sinkrate on a map. Some would consider this cheating :)</long-description>
+
+        <license>
+            <designation type="string">GNU GPL version 3 or later</designation>
+            <!--<file type="string">LICENSE</file>-->
+            <url type="string">https://www.gnu.org/licenses/gpl-3.0</url>
+        </license>
+
+        <min-FG-version type="string">2018.3.0</min-FG-version>
+        <max-FG-version type="string">none</max-FG-version>
+
+        <urls>
+            <download type="string">https://github.com/hbeni/SinkrateVisualizer/releases</download>
+            <support type="string">https://github.com/hbeni/SinkrateVisualizer/issues</support>
+            <code-repository type="string">https://github.com/hbeni/SinkrateVisualizer/</code-repository>
+        </urls>
+
+        <tags>
+            <tag type="string">glider</tag>
+            <tag type="string">weather</tag>
+        </tags>
+
+    </addon>
+</PropertyList>
