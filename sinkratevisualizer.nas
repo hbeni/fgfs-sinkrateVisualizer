@@ -18,9 +18,10 @@ var openMap =  func() {
     Styles.APS = {};
     Styles.APS.scale_factor = 0.25;
     
-    var r = func(name,vis=1,zindex=nil) return caller(0)[0];
     foreach(var type; [
-        r('FLTsink'),
-        {name:'APS',vis:1,zindex:nil,scale:0.2}
+        {name:'FLTsink',vis:1,zindex:nil},
+        {name:'APS',vis:1,zindex:nil,scale:0.2},
+        {name:'GRID',vis:1,zindex:nil}
     ] ) TestMap.addLayer(factory: canvas.SymbolLayer, type_arg: type.name, visible: type.vis, style: Styles.get(type.name), priority: type.zindex,);
+
 }
