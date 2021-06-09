@@ -11,13 +11,8 @@ SymbolLayer.get(name).df_style = { # style to use by default
 };
 
 var init = func {
-	me.element.setColor(me.getSegmentColor())
-	.setStrokeLineWidth(me.layer.style.line_width);
+    print("FLTsink symbol init");
+    me.element.setColor([0,0,0]);
+    me.element.setStrokeLineWidth(me.layer.style.line_width);
 	me.needs_update = 1;
 };
-
-# Get color by sinkrate
-var getSegmentColor = func {
-    var color = [rand(),rand(),rand()];   # TODO: make this depending on sinkrate
-    return color;
-}

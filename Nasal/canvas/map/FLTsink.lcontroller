@@ -15,14 +15,33 @@ SymbolLayer.add(name, {
 		append(model, item);
 		var pos = me.controller.getpos(item);
 		var cmd = me.list[idx].element._last_cmd == -1 ? canvas.Path.VG_MOVE_TO : canvas.Path.VG_LINE_TO;
+        var color = me.getSegmentColor(idx);
+        me.list[idx].element.set("stroke", "rgba("~color[0]~","~color[1]~","~color[2]~",1)");
 		me.list[idx].element.addSegmentGeo(cmd, ["N"~pos[0],"E"~pos[1]]);
-		props.dump(me.list[idx].element._node);
+		#debug.dump(me.list[idx].element._node);
 	},
 	type: name, # Symbol type
 	df_controller: __self__, # controller to use by default -- this one
 	add_sym: func(model) {
 		return Symbol.new(me.type, me.group, me, model);
 	},
+    
+    # Get color by sinkrate
+    stored_colors: [],
+    getSegmentColor: func(idx) {
+        print("FLTsink getSegmentColor("~idx~")");
+        while(size(me.stored_colors) <= idx) {
+            append(me.stored_colors, [rand()*255,rand()*255,rand()*255]);   # TODO: make this depending on sinkrate
+            print("FLTsink getSegmentColor("~idx~")   generated new");
+        }
+        debug.dump(me.stored_colors[idx]);
+        
+        return [rand()*255,rand()*255,rand()*255];
+        #return me.stored_colors[idx];
+    },
+    
+    stored_colors: [],
+    
 });
 var new = func(layer) {
 	var m = {
@@ -42,16 +61,26 @@ var del = func() {
 		removelistener(l);
 };
 
+var path2color = [];
+
 var searchCmd = func() {
 	logprint(_MP_dbg_lvl, "Running query: FLTsink");
 	var hist = aircraft.history();
 	var path = hist.pathForHistory(1000);
 	logprint(_MP_dbg_lvl, "FLTsink size: "~size(path));
-	while (size(me.models) <= me.active_path) append(me.models, []);
-	for (var i=size(me.models[me.active_path]); i<size(path); i+=1)
+	while (size(me.models) <= me.active_path) {
+        print("FLTsink searchCmd: while");
+        append(me.models, []);
+    }
+	for (var i=size(me.models[me.active_path]); i<size(path); i+=1) {
+        print("FLTsink searchCmd: for path="~i);
+        debug.dump(me.models[me.active_path]);
+        #if (! me.models[me.active_path] and ! me.models[me.active_path].getSegmentColor) me.models[me.active_path].getSegmentColor = me.getSegmentColor();
+        #me.models[me.active_path].setColor(me.models[me.active_path].getSegmentColor);
 		me.layer.append(me.active_path, path[i], me.models[me.active_path]);
+    }
 	# TODO: filter by in_range()?
-	debug.dump(me.models);
+	debug.dump({FLTsink_searchCmd: me.models});
 	return me.models;
 };
 var getpos = Symbol.Controller.getpos;
