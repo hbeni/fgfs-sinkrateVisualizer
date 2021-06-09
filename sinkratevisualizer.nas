@@ -6,6 +6,7 @@ var openMap =  func() {
     var TestMap = temp.root.createChild("map");
     TestMap.setController("Aircraft position");
     TestMap.setRange(5);
+    TestMap.update_quickly = ["FLTsink"];
     
     # this will center the map
     TestMap.setTranslation(
